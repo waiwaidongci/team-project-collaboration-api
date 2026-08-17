@@ -13,7 +13,7 @@ func TestErrorClassification(t *testing.T) {
 	if CodeFor(lookupErr) != "not_found" {
 		t.Fatalf("CodeFor() = %q, want not_found", CodeFor(lookupErr))
 	}
-	timeoutErr := errors.New("request timed out")
+	timeoutErr := ErrTimeout
 	if !IsRetryable(timeoutErr) {
 		t.Fatal("timeout error should be retryable")
 	}

@@ -14,5 +14,5 @@ func WrapLookupError(err error) error {
 	if err == nil {
 		return nil
 	}
-	return fmt.Errorf("lookup failed: %v", err)
+	return fmt.Errorf("lookup failed: %w", err)
 }
