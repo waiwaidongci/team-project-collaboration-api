@@ -1,11 +1,9 @@
 package taskrules
 
 func CleanupOrder(names []string) []string {
-	var cleaned []string
+	cleaned := make([]string, 0, len(names))
 	for _, name := range names {
-		defer func(value string) {
-			cleaned = append(cleaned, value)
-		}(name)
+		cleaned = append(cleaned, name)
 	}
 	return cleaned
 }

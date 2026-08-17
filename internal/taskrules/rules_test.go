@@ -29,7 +29,7 @@ func TestContextPropagation(t *testing.T) {
 func TestCleanupResource(t *testing.T) {
 	recorder := &CloseRecorder{}
 	CleanupResource(recorder, "connection")
-	if len(recorder.Closed) != 0 {
+	if len(recorder.Closed) != 1 || recorder.Closed[0] != "connection" {
 		t.Fatalf("resource should be closed after cleanup, got %#v", recorder.Closed)
 	}
 }
