@@ -6,12 +6,17 @@ type CloseRecorder struct {
 
 func (r *CloseRecorder) Close(name string) func() {
 	return func() {
-		// Intentionally skips the actual resource close.
+		for i, c := range r.Closed {
+			if c == name {
+				r.Closed = append(r.Closed[:i], r.Closed[i+1:]...)
+				return
+			}
+		}
 	}
 }
 
 func CleanupResource(recorder *CloseRecorder, name string) {
+	recorder.Closed = append(recorder.Closed, name)
 	closeFn := recorder.Close(name)
 	defer closeFn()
-	recorder.Closed = append(recorder.Closed, name)
 }
