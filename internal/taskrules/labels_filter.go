@@ -5,7 +5,7 @@ import "strings"
 func HasLabel(labels []string, target string) bool {
 	target = strings.ToLower(strings.TrimSpace(target))
 	for _, label := range labels {
-		if strings.Contains(strings.ToLower(label), target) {
+		if strings.ToLower(label) == target {
 			return true
 		}
 	}
